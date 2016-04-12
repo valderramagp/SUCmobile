@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import layout.FragmentoDetalleAsignatura;
+
 public class DetalleAsignaturas extends AppCompatActivity {
 
     @Override
@@ -22,9 +24,18 @@ public class DetalleAsignaturas extends AppCompatActivity {
         }
 
         if (savedInstanceState == null) {
-            /*Bundle arguments = new Bundle();
+            Bundle arguments = new Bundle();
 
-            arguments.putString();*/
+            arguments.putString(FragmentoDetalleAsignatura.ID_ASIGNATURA,
+                    getIntent().getStringExtra(FragmentoDetalleAsignatura.ID_ASIGNATURA));
+
+            FragmentoDetalleAsignatura fragment = new FragmentoDetalleAsignatura();
+
+            fragment.setArguments(arguments);
+
+            getSupportFragmentManager().beginTransaction().add(R.id.contenedor_detalle, fragment).commit();
+
+
         }
     }
 }

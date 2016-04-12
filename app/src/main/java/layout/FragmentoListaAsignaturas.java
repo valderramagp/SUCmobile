@@ -124,9 +124,15 @@ public class FragmentoListaAsignaturas extends Fragment implements AdaptadorAsig
         escucha = null;
     }
 
+    public void cargarDetalle(String idAsignatura) {
+        if (escucha != null) {
+            escucha.alSeleccionarItem(idAsignatura);
+        }
+    }
+
     @Override
     public void onClick(AdaptadorAsignaturas.AsignaturasViewHolder viewHolder, String idAsignatura) {
-
+        cargarDetalle(idAsignatura);
     }
 
     public interface EscuchaFragmento {
