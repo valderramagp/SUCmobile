@@ -33,7 +33,9 @@ import suc.itmotions.net.webservice.Constantes;
 
 public class FragmentoDetalleAsignatura extends Fragment {
 
-    public static final String ID_ASIGNATURA = "extra.IdAsignatura";
+    public static final String EXTRA_ID = "IDASIGNATURA";
+
+    private String extra;
 
     private List<DetalleAsignatura> detalleAsignaturaList;
 
@@ -42,12 +44,12 @@ public class FragmentoDetalleAsignatura extends Fragment {
 
     public FragmentoDetalleAsignatura(){}
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments().containsKey(ID_ASIGNATURA)){
-            asignatura = getArguments().getString(ID_ASIGNATURA);
-        }
+    public static FragmentoDetalleAsignatura createInstance(String idAsignatura) {
+        FragmentoDetalleAsignatura detailFragment = new FragmentoDetalleAsignatura();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_ID, idAsignatura);
+        detailFragment.setArguments(bundle);
+        return detailFragment;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceStatte) {
@@ -58,7 +60,9 @@ public class FragmentoDetalleAsignatura extends Fragment {
 
         assert recyclerView != null;
 
-        detalleAsignaturaList = getDetalleAsignatura(asignatura);
+        extra = getArguments().getString(EXTRA_ID);
+
+        detalleAsignaturaList = getDetalleAsignatura();
 
         prepararLista((RecyclerView) recyclerView, detalleAsignaturaList);
 
@@ -77,7 +81,7 @@ public class FragmentoDetalleAsignatura extends Fragment {
         recyclerView.setAdapter(new DetalleAsignaturaAdapter(asignaturas));
     }
 
-    public List<DetalleAsignatura> getDetalleAsignatura(String asignatura) {
+    public List<DetalleAsignatura> getDetalleAsignatura() {
         JSONObject jsonObject = null;
 
         String line;
@@ -87,7 +91,7 @@ public class FragmentoDetalleAsignatura extends Fragment {
         try {
             SharedPreferences preferencias = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
             String username = preferencias.getString("name","0");
-            URL link = new URL(Constantes.IP + Constantes.MODULE_ALUMNOS + "getAsignaturaDetalle.php" + "?username=" + username + "&asignatura=" + asignatura);
+            URL link = new URL(Constantes.IP + Constantes.MODULE_ALUMNOS + "getAsignaturaDetalle.php" + "?username=" + username + "&asignatura=" + extra);
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
 
             StringBuilder result = new StringBuilder();

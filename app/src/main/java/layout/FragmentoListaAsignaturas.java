@@ -30,9 +30,9 @@ import suc.itmotions.net.adapters.AdaptadorAsignaturas;
 import suc.itmotions.net.entities.Asignatura;
 import suc.itmotions.net.webservice.Constantes;
 
-public class FragmentoListaAsignaturas extends Fragment implements AdaptadorAsignaturas.OnItemClickListener {
+public class FragmentoListaAsignaturas extends Fragment {
 
-    private EscuchaFragmento escucha;
+    private AdaptadorAsignaturas adapter;
 
     public FragmentoListaAsignaturas() {
 
@@ -54,15 +54,10 @@ public class FragmentoListaAsignaturas extends Fragment implements AdaptadorAsig
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragmento_lista_asignaturas, container, false);
-        View recyclerView = v.findViewById(R.id.Rv);
-        assert recyclerView != null;
+        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.Rv);
         List<Asignatura> asignaturas = consultaAsignaturas();
-        prepararLista((RecyclerView) recyclerView, asignaturas);
+        adapter = new AdaptadorAsignaturas(asignaturas, getActivity());
         return v;
-    }
-
-    private void prepararLista(@NonNull RecyclerView recyclerView, List<Asignatura> asignaturas) {
-        recyclerView.setAdapter(new AdaptadorAsignaturas(asignaturas,this));
     }
 
     public List<Asignatura> consultaAsignaturas() {
@@ -103,39 +98,5 @@ public class FragmentoListaAsignaturas extends Fragment implements AdaptadorAsig
             e.printStackTrace();
         }
         return Asignaturas;
-    }
-
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof EscuchaFragmento) {
-            escucha = (EscuchaFragmento) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " debes implementar EscuchaFragmento");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        escucha = null;
-    }
-
-    public void cargarDetalle(String idAsignatura) {
-        if (escucha != null) {
-            escucha.alSeleccionarItem(idAsignatura);
-        }
-    }
-
-    @Override
-    public void onClick(AdaptadorAsignaturas.AsignaturasViewHolder viewHolder, String idAsignatura) {
-        cargarDetalle(idAsignatura);
-    }
-
-    public interface EscuchaFragmento {
-        void alSeleccionarItem(String idAsignatura);
     }
 }
