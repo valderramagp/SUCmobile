@@ -24,6 +24,15 @@ public class ListaAsignaturas extends AppCompatActivity implements FragmentoList
 
     }
 
+    private void cargarFragmentoDetalle(String id) {
+        Bundle arguments = new Bundle();
+        arguments.putString(FragmentoDetalleAsignatura.ID_ASIGNATURA, id);
+        FragmentoDetalleAsignatura fragment = new FragmentoDetalleAsignatura();
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_detalle, fragment).commit();
+    }
+
+    @Override
     public void alSeleccionarItem(String idAsignatura) {
         Intent intent = new Intent(this, DetalleAsignatura.class);
         intent.putExtra(FragmentoDetalleAsignatura.ID_ASIGNATURA, idAsignatura);

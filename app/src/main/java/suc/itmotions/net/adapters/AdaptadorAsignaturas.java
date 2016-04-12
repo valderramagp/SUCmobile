@@ -31,8 +31,7 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<AdaptadorAsignatu
     @Override
     public AsignaturasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
-        AsignaturasViewHolder viewHolder = new AsignaturasViewHolder(v);
-        return viewHolder;
+        return new AsignaturasViewHolder(v);
     }
 
     @Override
@@ -58,16 +57,12 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<AdaptadorAsignatu
         }
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView){
-        super.onAttachedToRecyclerView(recyclerView);
-    }
-
     public class AsignaturasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tvTitle,tvDescription, id;
         public CardView cardView;
         public AsignaturasViewHolder(View itemView){
             super(itemView);
+            itemView.setClickable(true);
             cardView = (CardView)itemView.findViewById(R.id.card_view);
             tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
             tvDescription = (TextView)itemView.findViewById(R.id.tvDescription);

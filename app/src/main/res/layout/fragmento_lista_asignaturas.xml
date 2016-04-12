@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layoutManager="LinearLayoutManager">
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/cardview">
 
     </android.support.v7.widget.RecyclerView>
 
