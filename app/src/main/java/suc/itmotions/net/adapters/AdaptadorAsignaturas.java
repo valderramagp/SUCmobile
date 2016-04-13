@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -36,7 +38,12 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<AdaptadorAsignatu
 
     @Override
     public int getItemCount() {
-        return asignaturas.size();
+        if (asignaturas != null) {
+            return asignaturas.size();
+        } else {
+            return 0;
+        }
+
     }
 
     @Override
@@ -63,7 +70,7 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<AdaptadorAsignatu
 
         public AsignaturasViewHolder(View itemView, ItemClickListener listener){
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.card_view);
+            itemView.setOnClickListener(this);
             tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
             tvDescription = (TextView)itemView.findViewById(R.id.tvDescription);
             this.listener = listener;
@@ -72,6 +79,7 @@ public class AdaptadorAsignaturas extends RecyclerView.Adapter<AdaptadorAsignatu
 
         @Override
         public void onClick(View v) {
+            Log.d("Adaptador", "onClick" + getAdapterPosition() );
             listener.onItemClick(v, getAdapterPosition());
         }
     }

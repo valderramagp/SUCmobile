@@ -31,6 +31,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
+        boolean login = prefs.getBoolean("login", false);
+        if (login) {
+            Intent intent = new Intent(LoginActivity.this, ListaAsignaturas.class);
+            startActivity(intent);
+        }
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -46,11 +53,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (status.equals("1"))
                 {
 
-                    SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
 
+                    SharedPreferences prefs = getSharedPreferences("user", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("name", editUser.getText().toString());
                     editor.putString("password", editPass.getText().toString());
+                    editor.putBoolean("login", true);
 
                     editor.apply();
 

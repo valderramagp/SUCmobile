@@ -1,61 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="130dp"
+    android:background="?android:attr/selectableItemBackground"
     >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Calidad en el Desarrollo de Software"
+        android:id="@+id/tvTitle"
+        android:layout_alignParentTop="true"
+        android:paddingTop="24dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:focusable="false"
+        android:textStyle="bold" />
 
-    <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="4dp"
-        card_view:cardUseCompatPadding="true"
-        android:clickable="true">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Calidad en el Desarrollo de Software"
-                android:id="@+id/tvTitle"
-                android:layout_alignParentTop="true"
-                android:paddingTop="24dp"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:focusable="false"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sandra Hernández Chacón"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/tvDescription"
-                android:layout_below="@+id/tvTitle"
-                android:layout_alignLeft="@+id/tvTitle"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                />
-            <Button
-                android:id="@+id/Pass"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="DETALLE"
-                android:textColor="#0288D1"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sandra Hernández Chacón"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvDescription"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        />
+</RelativeLayout>

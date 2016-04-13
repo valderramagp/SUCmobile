@@ -57,6 +57,7 @@ public class FragmentoListaAsignaturas extends Fragment {
         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.Rv);
         List<Asignatura> asignaturas = consultaAsignaturas();
         adapter = new AdaptadorAsignaturas(asignaturas, getActivity());
+        recyclerView.setAdapter(adapter);
         return v;
     }
 
@@ -68,7 +69,7 @@ public class FragmentoListaAsignaturas extends Fragment {
         try {
             SharedPreferences preferencias = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
             String username = preferencias.getString("name","0");
-            URL link = new URL(Constantes.IP + Constantes.MODULE_ALUMNOS + "getAsignaturas.php" + "?username=" + username);
+            URL link = new URL(Constantes.IP + Constantes.MODULE_ASIGNATURAS + "getAll.php" + "?username=" + username);
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
 
             StringBuilder result = new StringBuilder();

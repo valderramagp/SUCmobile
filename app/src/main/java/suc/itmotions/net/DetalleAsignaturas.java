@@ -18,10 +18,11 @@ public class DetalleAsignaturas extends AppCompatActivity {
 
     public static void launch(Activity activity, String idAsignatura) {
         Intent intent = getLaunchIntent(activity, idAsignatura);
+        activity.startActivityForResult(intent, Constantes.CODIGO_DETALLE);
     }
 
     public static Intent getLaunchIntent(Context context, String idAsignatura) {
-        Intent intent = new Intent(context, DetalleAsignatura.class);
+        Intent intent = new Intent(context, DetalleAsignaturas.class);
         intent.putExtra(Constantes.EXTRA_ID, idAsignatura);
         return intent;
     }
@@ -31,18 +32,16 @@ public class DetalleAsignaturas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_asignaturas);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_detalle);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if (getIntent().getStringExtra(Constantes.EXTRA_ID) != null) {
             idAsignatura = getIntent().getStringExtra(Constantes.EXTRA_ID);
         }
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.contenedor_detalle,
+            getSupportFragmentManager().beginTransaction().add(R.id.contenedor,
                     FragmentoDetalleAsignatura.createInstance(idAsignatura), "FragmentoDetalleAsignatura").commit();
         }
     }
